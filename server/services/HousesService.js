@@ -8,7 +8,7 @@ class HousesService {
   }
 
   async getById(id) {
-    const house = await dbContext.Cars.findById(id)
+    const house = await dbContext.Houses.findById(id)
     if (!house) {
       throw new BadRequest('Invalid ID')
     }
@@ -16,7 +16,7 @@ class HousesService {
   }
 
   async create(body) {
-    const house = await dbContext.Cars.create(body)
+    const house = await dbContext.Houses.create(body)
     return house
   }
 
