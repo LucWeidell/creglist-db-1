@@ -1,0 +1,40 @@
+import { dbContext } from '../db/DbContext'
+import { BadRequest } from '../utils/Errors'
+
+class CarsService {
+  async getAll(query = {}) {
+    const car = await dbContext.Cars.find(query)
+    return car
+  }
+
+  async getById(id) {
+    const car = await dbContext.Cars.findById(id)
+    if (!car) {
+      throw new BadRequest('Invalid ID')
+    }
+    return car
+  }
+
+  async create(body) {
+    const car = await dbContext.Cars.create(body)
+    return car
+  }
+
+  async edit(body) {
+    const car = await dbContext.Cars.findByIdAndUpdate(body.id, body, { new: true, runValidators: true })
+    if (!car) {
+      throw new BadRequest('Invalid ID')
+    }
+    return car
+  }
+
+  async delete(id) {
+    const car = await dbContext.Cars.findByIdAndDelete(id)
+    if (!car) {
+      throw new BadRequest('Invalid ID')
+    }
+    return car
+  }
+}
+
+export const carsService = new CarsService()
