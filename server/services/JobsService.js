@@ -8,7 +8,7 @@ class JobsService {
   }
 
   async getById(id) {
-    const job = await dbContext.Cars.findById(id)
+    const job = await dbContext.Jobs.findById(id)
     if (!job) {
       throw new BadRequest('Invalid ID')
     }
@@ -16,7 +16,7 @@ class JobsService {
   }
 
   async create(body) {
-    const job = await dbContext.Cars.create(body)
+    const job = await dbContext.Jobs.create(body)
     return job
   }
 
